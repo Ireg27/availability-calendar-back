@@ -40,4 +40,14 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function unavailabilities(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Unavailability::class);
+    }
+
+    public function isAvailableOnDate($date)
+    {
+        return !$this->unavailabilities()->where('date', $date)->exists();
+    }
 }

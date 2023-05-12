@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\UnavailabilityController;
 use App\Http\Controllers\Api\AuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,10 @@ Route::controller(AuthController::class)->group(function(){
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logout', [AuthController::class, 'logout']);
+
+    Route::get('users/{user}/unavailabilities', [UnavailabilityController::class, 'index']);
+    Route::put('users/{user}/unavailability', [UnavailabilityController::class, 'toggle']);
+    Route::post('users/{user}/unavailabilities', [UnavailabilityController::class, 'setUnavailabilityForAll']);
+    Route::post('/users/{user}/unavailabilities/check-availability', [UnavailabilityController::class, 'checkAvailability']);
+
 });

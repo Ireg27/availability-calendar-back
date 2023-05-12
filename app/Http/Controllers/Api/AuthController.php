@@ -49,8 +49,8 @@ class AuthController extends BaseApiController
     {
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
-            $success['access_token'] =  $user->createToken('MyApp')->plainTextToken;
-            $success['userId'] =  $user->id;
+            $success['access_token'] =  $user->createToken('AvailabilityCalendarApp')->plainTextToken;
+            $success['user_id'] =  $user->id;
 
             return $this->sendResponse($success, 'User login successfully.');
         }

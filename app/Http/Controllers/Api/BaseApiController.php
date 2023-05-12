@@ -10,6 +10,8 @@ class BaseApiController extends Controller
     /**
      * success response method.
      *
+     * @param $result
+     * @param $message
      * @return JsonResponse
      */
     public function sendResponse($result, $message): JsonResponse
@@ -21,13 +23,16 @@ class BaseApiController extends Controller
         ];
 
 
-        return response()->json($response, 200);
+        return response()->json($response, 201);
     }
 
 
     /**
      * return error response.
      *
+     * @param $error
+     * @param array $errorMessages
+     * @param int $code
      * @return JsonResponse
      */
     public function sendError($error, $errorMessages = [], $code = 404): JsonResponse
